@@ -19,6 +19,7 @@ export class AppComponent {
   patientModal = false;
   isUpdate = false;
   id = '';
+  maxDate = '';
 
   prefixList = [
     { id: 'นาย', name: 'นาย (Mr.)' },
@@ -46,6 +47,7 @@ export class AppComponent {
   ngOnInit() {
     this.buildForm();
     this.loadData();
+    this.setMaxDate();
   }
 
   buildForm() {
@@ -151,6 +153,9 @@ export class AppComponent {
   }
 
   openModal(item: any, mode: string) {
+    const dbBirthDate = item.birth_date; 
+    const dbCreatedAt = item.created_at;
+    const dbUpdatedAt = item.updated_at;
     if (mode === 'edit' && item) {
       this.patientForm.patchValue({
         hn: item.hn,
@@ -159,11 +164,11 @@ export class AppComponent {
         first_name: item.first_name,
         last_name: item.last_name,
         gender: item.gender,
-        birth_date: item.birth_date,
+        birth_date:dbBirthDate? dbBirthDate.split('T')[0] || '' : '',
         phone: item.phone,
         address: item.address,
-        created_at: item.created_at,
-        updated_at: item.updated_at
+        created_at: dbCreatedAt? dbCreatedAt.split('T')[0] || '' : '',
+        updated_at: dbUpdatedAt? dbUpdatedAt.split('T')[0] || '' : ''
       });
       this.id = item.id;
       this.isUpdate = true;
@@ -189,4 +194,14 @@ generateUniqueCode(): string { // เปลี่ยนจาก void เป็�
   // ส่งค่ากลับออกไปตรงๆ
   return `${timestamp}${lastThreeDigits}`;
 }
+
+  setMaxDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    // ผลลัพธ์จะได้ เช่น "2026-10-06"
+    this.maxDate = `${year}-${month}-${day}`; 
+  }
 }

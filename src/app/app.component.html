@@ -38,7 +38,7 @@
           <input type="text" formControlName="last_name" placeholder="สกุล" style="margin-right: 5px;"><br>
         </div>
         <div>
-        <label for="gender">เลือกเพศ:</label>
+          <label for="gender">เลือกเพศ:</label>
           <select id="gender" formControlName="gender"
             style="display: block; width: 100%; max-width: 300px; height: 30px; margin-top: 5px; padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
             <option *ngFor="let item of genderList" [value]="item.id">{{ item.name }}</option>
@@ -46,7 +46,8 @@
         </div><br>
         <div>
           <label for="other">วันเดือนปีเกิด:</label>
-          <input type="date" formControlName="birth_date" placeholder="วันเกิด" style="margin-right: 5px;">
+          <input type="date" formControlName="birth_date" [max]="maxDate" placeholder="วันเกิด"
+            style="margin-right: 5px;">
           <label for="other">เบอร์โทร:</label>
           <input type="text" formControlName="phone" placeholder="เบอร์โทร" style="margin-right: 5px;">
           <label for="other">ที่อยู่:</label>
