@@ -24,11 +24,11 @@ export class AppService {
     return this.http.post(this.apiUrl, data);
   }
 
-  updateItem(id: string, data: any): Observable<any> {
+  updateItem(id: any, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteItem(id: string): Observable<any> {
+  deleteItem(id: any): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
